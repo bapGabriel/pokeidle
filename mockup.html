@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokéIdle</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-slate-100">
+    <div id="root">
+        <!-- CONTAINER -->
+        <div class="flex gap-2 p-4 h-screen">
+            <!-- INIMIGO/FASE -->
+            <div class="bg-slate-200 flex-1 p-4">
+                <!-- SELETOR DE FASE -->
+                <div class="flex gap-2 y-overflow-scroll">
+                    <div class="w-24 h-24">
+                        <img src="placeholder_image" class="w-full h-full">
+                    </div>
+                    <div class="w-24 h-24">
+                        <img src="placeholder_image" class="w-full h-full">
+                    </div>
+                    <div class="w-24 h-24">
+                        <img src="placeholder_image" class="w-full h-full">
+                    </div>
+                    <div class="w-24 h-24">
+                        <img src="placeholder_image" class="w-full h-full">
+                    </div>
+                    <div class="w-24 h-24">
+                        <img src="placeholder_image" class="w-full h-full">
+                    </div>
+                </div>
+
+                <!-- POKÉMON INIMIGO -->
+                <div>
+                    <!-- SPRITE -->
+                    <div>
+                        <img src="placeholder_image" class="object-contain">
+                    </div>
+
+                    <!-- HP -->
+                    <div>
+                        <div>100/100HP</div>
+                    </div>
+
+                    <!-- AÇÕES -->
+                    <div>
+                        <button
+                            class="p-2 rounded border border-slate-600 bg-slate-100 hover:bg-slate-300">Atacar</button>
+                        <button
+                            class="p-2 rounded border border-slate-600 bg-slate-100 hover:bg-slate-300">Capturar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEU TIME -->
+            <div class="bg-slate-200 p-4 flex-1">
+                <!-- UPGRADES -->
+                <div></div>
+
+                <!-- ESTATISTICAS -->
+                <div>
+                    DANO PESSOAL: 10
+                    DANO DO TIME: 1000 DPS
+                </div>
+
+                <!-- MEUS POKEMON -->
+                <div class="flex flex-col gap-2">
+                    <div class="w-full bg-slate-300 rounded p-2">
+                        Pedrinho
+                    </div>
+
+                    <div class="w-full bg-slate-300 rounded p-2">
+                        Pedrinho
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

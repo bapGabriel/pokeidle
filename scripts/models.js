@@ -1,0 +1,5 @@
+/// Prototípicas
+
+/// Construtoras
+
+export default [];
