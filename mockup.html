@@ -27,24 +27,41 @@
         <!-- CONTAINER -->
         <div class="flex gap-2 p-4 h-screen">
             <!-- INIMIGO/FASE -->
-            <div class="flex flex-col bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
+            <div class="flex flex-col bg-gray-200 border-3 border-slate-500 rounded-lg flex-1">
                 <!-- SELETOR DE FASE -->
-                <div class="flex gap-2 y-overflow-scroll bg-slate-400">
-                    <div class="w-24 h-24">
-                        <img src="placeholder_image" class="w-full h-full">
+                <div class="flex mt-2">
+                    <div class="w-4"></div>
+
+                    <div
+                        class="flex flex-col items-center bg-slate-400 border-3 border-r-0 border-slate-500 rounded-lg rounded-r-none overflow-hidden">
+                        <div class="flex gap-2 overflow-x-scroll pb-4 p-2">
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                            <div class="flex-none">
+                                <img src="placeholder_image" class="w-24 h-24">
+                            </div>
+                        </div>
+                        <div class="bg-slate-200 w-full p-2">
+                            <span class="font-semibold text-lg">Lugar Lv. 40</span>
+                        </div>
                     </div>
-                    <div class="w-24 h-24">
-                        <img src="placeholder_image" class="w-full h-full">
-                    </div>
-                    <div class="w-24 h-24">
-                        <img src="placeholder_image" class="w-full h-full">
-                    </div>
-                    <div class="w-24 h-24">
-                        <img src="placeholder_image" class="w-full h-full">
-                    </div>
-                    <div class="w-24 h-24">
-                        <img src="placeholder_image" class="w-full h-full">
-                    </div>
+
                 </div>
 
                 <!-- POKÉMON INIMIGO -->
@@ -60,21 +77,33 @@
 
                     <!-- HP -->
                     <div class="flex flex-col items-center w-full gap-2">
-                        <div class="rounded-r-lg border-3 border-neutral-700 -ml-8 w-full border-l-0">
-                            <div class="rounded-tr bg-slate-400 p-2">
-                                <span>Charmander Lv. 50</span>
+                        <div class="flex w-full">
+                            <div class="rounded-r-lg overflow-hidden border-3 border-neutral-700 w-full border-l-0">
+                                <div class="bg-slate-400 p-2">
+                                    <span>Charmander Lv. 50</span>
+                                </div>
+                                <div class="flex items-center gap-2 bg-slate-200 p-2">
+                                    <span>HP:</span>
+                                    <div class="w-full h-3 bg-slate-400 border-2 border-neutral-700">
+                                        <div class="h-2 bg-green-400" style="width: 45%;"></div>
+                                    </div>
+                                    <span>100/100</span>
+                                </div>
                             </div>
-                            <div class="rounded-br bg-slate-200 p-2">
-                                <span>HP: -------------- 100/100</span>
-                            </div>
+                            <div class="w-2"></div>
                         </div>
 
                         <!-- AÇÕES -->
-                        <div class="flex gap-2 w-full">
-                            <button
-                                class="p-2 rounded border-3 border-neutral-700 bg-slate-400 w-full hover:bg-slate-200 active:bg-slate-100">Atacar</button>
-                            <button
-                                class="p-2 rounded border-3 border-neutral-700 bg-slate-400 w-full hover:bg-slate-200 active:bg-slate-100">Capturar</button>
+                        <div class="flex gap-2 w-full p-2">
+                            <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full">
+                                <button
+                                    class="p-2 bg-red-400 border-b-3 border-red-700 w-full hover:bg-red-400/80 hover:border-red-700/80 active:bg-red-400/60 active:border-red-700/60">Atacar</button>
+                            </div>
+                            <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full">
+                                <button
+                                    class="p-2 bg-emerald-400 border-b-3 border-emerald-700 w-full hover:bg-emerald-400/80 hover:border-emerald-700/80 active:bg-emerald-400/60 active:border-emerald-700/60">Capturar</button>
+                            </div>
+
                         </div>
 
                     </div>
@@ -87,9 +116,9 @@
                 <div></div>
 
                 <!-- ESTATISTICAS -->
-                <div>
-                    DANO PESSOAL: 10
-                    DANO DO TIME: 1000 DPS
+                <div class="flex flex-col">
+                    <span>DANO PESSOAL: 10</span>
+                    <span>DANO DO TIME: 1000 DPS</span>
                 </div>
 
                 <!-- MEUS POKEMON -->
