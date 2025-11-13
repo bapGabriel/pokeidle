@@ -6,16 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokéIdle</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Tiny5&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        @theme {
+        --font-tiny: "Tiny5", sans-serif;
+        }
+
+        @layer utilities {
+            .font-tiny {
+                font-family: var(--font-tiny);
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-slate-100">
+<body class="bg-green-400 font-tiny">
     <div id="root">
         <!-- CONTAINER -->
         <div class="flex gap-2 p-4 h-screen">
             <!-- INIMIGO/FASE -->
-            <div class="bg-slate-200 flex-1 p-4">
+            <div class="bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
                 <!-- SELETOR DE FASE -->
-                <div class="flex gap-2 y-overflow-scroll">
+                <div class="flex gap-2 y-overflow-scroll bg-slate-400">
                     <div class="w-24 h-24">
                         <img src="placeholder_image" class="w-full h-full">
                     </div>
@@ -41,8 +55,13 @@
                     </div>
 
                     <!-- HP -->
-                    <div>
-                        <div>100/100HP</div>
+                    <div class="rounded-r-lg border-3 border-neutral-700 -ml-4 border-l-0">
+                        <div class="rounded-tr bg-slate-400 p-2">
+                            <span>Charmander Lv. 50</span>
+                        </div>
+                        <div class="rounded-br bg-slate-200 p-2">
+                            <span>HP: -------------- 100/100</span>
+                        </div>
                     </div>
 
                     <!-- AÇÕES -->
@@ -56,7 +75,7 @@
             </div>
 
             <!-- MEU TIME -->
-            <div class="bg-slate-200 p-4 flex-1">
+            <div class="bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
                 <!-- UPGRADES -->
                 <div></div>
 
