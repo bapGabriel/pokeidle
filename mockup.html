@@ -27,7 +27,7 @@
         <!-- CONTAINER -->
         <div class="flex gap-2 p-4 h-screen">
             <!-- INIMIGO/FASE -->
-            <div class="bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
+            <div class="flex flex-col bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
                 <!-- SELETOR DE FASE -->
                 <div class="flex gap-2 y-overflow-scroll bg-slate-400">
                     <div class="w-24 h-24">
@@ -48,28 +48,35 @@
                 </div>
 
                 <!-- POKÉMON INIMIGO -->
-                <div>
+                <div class="flex flex-col flex-1 gap-2 items-center justify-between h-auto">
                     <!-- SPRITE -->
-                    <div>
-                        <img src="placeholder_image" class="object-contain">
+                    <div class="w-1/2 flex flex-col items-center flex-1 justify-center">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+                            class="z-1 scale-500 [image-rendering:pixelated]">
+                        <div
+                            class="relative -bottom-12 z-0 w-6 h-6 bg-black rounded-full blur scale-x-1000 scale-y-200">
+                        </div>
                     </div>
 
                     <!-- HP -->
-                    <div class="rounded-r-lg border-3 border-neutral-700 -ml-4 border-l-0">
-                        <div class="rounded-tr bg-slate-400 p-2">
-                            <span>Charmander Lv. 50</span>
+                    <div class="flex flex-col items-center w-full gap-2">
+                        <div class="rounded-r-lg border-3 border-neutral-700 -ml-8 w-full border-l-0">
+                            <div class="rounded-tr bg-slate-400 p-2">
+                                <span>Charmander Lv. 50</span>
+                            </div>
+                            <div class="rounded-br bg-slate-200 p-2">
+                                <span>HP: -------------- 100/100</span>
+                            </div>
                         </div>
-                        <div class="rounded-br bg-slate-200 p-2">
-                            <span>HP: -------------- 100/100</span>
-                        </div>
-                    </div>
 
-                    <!-- AÇÕES -->
-                    <div>
-                        <button
-                            class="p-2 rounded border border-slate-600 bg-slate-100 hover:bg-slate-300">Atacar</button>
-                        <button
-                            class="p-2 rounded border border-slate-600 bg-slate-100 hover:bg-slate-300">Capturar</button>
+                        <!-- AÇÕES -->
+                        <div class="flex gap-2 w-full">
+                            <button
+                                class="p-2 rounded border-3 border-neutral-700 bg-slate-400 w-full hover:bg-slate-200 active:bg-slate-100">Atacar</button>
+                            <button
+                                class="p-2 rounded border-3 border-neutral-700 bg-slate-400 w-full hover:bg-slate-200 active:bg-slate-100">Capturar</button>
+                        </div>
+
                     </div>
                 </div>
             </div>
