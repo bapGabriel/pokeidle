@@ -20,20 +20,26 @@
             }
         }
     </style>
+    <style>
+        .mask-radial {
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 0%);
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 0%);
+        }
+    </style>
 </head>
 
 <body class="bg-green-400 font-tiny">
-    <div id="root">
+    <div id="root" class="flex items-center justify-center h-screen">
         <!-- CONTAINER -->
-        <div class="flex gap-2 p-4 h-screen">
+        <div class="flex gap-2 container p-2 mx-auto">
             <!-- INIMIGO/FASE -->
             <div class="flex flex-col bg-gray-200 border-3 border-slate-500 rounded-lg flex-1">
                 <!-- SELETOR DE FASE -->
                 <div class="flex mt-2">
-                    <div class="w-4"></div>
+                    <div class="w-2"></div>
 
                     <div
-                        class="flex flex-col items-center bg-slate-400 border-3 border-r-0 border-slate-500 rounded-lg rounded-r-none overflow-hidden">
+                        class="flex flex-col flex-1 items-center bg-slate-400 border-3 border-r-0 border-slate-500 rounded-lg rounded-r-none overflow-hidden">
                         <div class="flex gap-2 overflow-x-scroll pb-4 p-2">
                             <div class="flex-none">
                                 <img src="placeholder_image" class="w-24 h-24">
@@ -58,20 +64,54 @@
                             </div>
                         </div>
                         <div class="bg-slate-200 w-full p-2">
-                            <span class="font-semibold text-lg">Lugar Lv. 40</span>
+                            <span class="text-lg">Lugar Lv. 40</span>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- POKÉMON INIMIGO -->
+                <!-- <div
+                class="relative -bottom-12 z-0 w-6 h-6 bg-black rounded-full blur scale-x-1000 scale-y-200">
+            </div> -->
                 <div class="flex flex-col flex-1 gap-2 items-center justify-between h-auto">
-                    <!-- SPRITE -->
-                    <div class="w-1/2 flex flex-col items-center flex-1 justify-center">
+                    <div class="w-full flex flex-col items-center flex-1 justify-center">
+                        <!-- SPRITE -->
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-                            class="z-1 scale-500 [image-rendering:pixelated]">
+                            class="absolute z-1 h-1/2 [image-rendering:pixelated]">
+
                         <div
-                            class="relative -bottom-12 z-0 w-6 h-6 bg-black rounded-full blur scale-x-1000 scale-y-200">
+                            class="absolute z-0 h-64 w-64 bg-gray-400 mask-radial flex items-center justify-center scale-x-100 sm:scale-x-150 md:scale-x-200 lg:scale-x-250 xl:scale-x-300 scale-y-100 translate-y-20">
+                            <div
+                                class="absolute z-0 h-60 w-60 bg-gray-300 mask-radial flex items-center justify-center">
+                                <div
+                                    class="absolute z-0 h-48 w-48 bg-gray-200 mask-radial flex items-center justify-center">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full flex flex-col flex-1 gap-1 py-4">
+                            <div class="w-full flex-auto h-3 bg-gray-400"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/60"></div>
+                            <div class="w-full flex-auto h-1 bg-gray-400/40"></div>
+                            <div class="w-full flex-auto h-1 bg-gray-400/40"></div>
+                            <div class="w-full flex-auto h-24 bg-gray-200"></div>
+                            <div class="w-full flex-auto h-1 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/20"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/10"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/5"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/4"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/3"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/2"></div>
+                            <div class="w-full flex-auto h-3 bg-gray-400/1"></div>
+
                         </div>
                     </div>
 
@@ -80,7 +120,7 @@
                         <div class="flex w-full">
                             <div class="rounded-r-lg overflow-hidden border-3 border-neutral-700 w-full border-l-0">
                                 <div class="bg-slate-400 p-2">
-                                    <span>Charmander Lv. 50</span>
+                                    <span class="text-gray-100">Charmander Lv. 50</span>
                                 </div>
                                 <div class="flex items-center gap-2 bg-slate-200 p-2">
                                     <span>HP:</span>
@@ -110,25 +150,154 @@
                 </div>
             </div>
 
-            <!-- MEU TIME -->
-            <div class="bg-gray-200 border-3 border-slate-500 rounded-lg flex-1 p-4">
-                <!-- UPGRADES -->
-                <div></div>
+            <div class="flex flex-col flex-1 gap-2">
+                <!-- LOJA / UPGRADES -->
+                <div
+                    class="flex items-center justify-between gap-4 bg-gray-200 border-3 border-slate-500 rounded-lg overflow-hidden h-1/5">
+                    <div class="flex flex-col w-1/3 p-2 gap-1 h-full">
+                        <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full h-full">
+                            <button
+                                class="bg-amber-400 border-b-3 border-amber-700 w-full hover:bg-amber-400/80 h-full hover:border-amber-700/80 active:bg-amber-400/60 active:border-amber-700/60">
+                                + Ataque (Pessoal) ($100)</button>
+                        </div>
+                        <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full h-full">
+                            <button
+                                class="bg-amber-400 border-b-3 border-amber-700 w-full hover:bg-amber-400/80 h-full hover:border-amber-700/80 active:bg-amber-400/60 active:border-amber-700/60">
+                                + Ataque (Pokémons) ($100)</button>
+                        </div>
+                        <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full h-full">
+                            <button
+                                class="bg-amber-400 border-b-3 border-amber-700 w-full hover:bg-amber-400/80 h-full hover:border-amber-700/80 active:bg-amber-400/60 active:border-amber-700/60">
+                                + Dinheiro Obtido ($100)</button>
+                        </div>
+                        <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full h-full">
+                            <button
+                                class="bg-amber-400 border-b-3 border-amber-700 w-full hover:bg-amber-400/80 h-full hover:border-amber-700/80 active:bg-amber-400/60 active:border-amber-700/60">
+                                + Taxa de Captura ($100)</button>
+                        </div>
 
-                <!-- ESTATISTICAS -->
-                <div class="flex flex-col">
-                    <span>DANO PESSOAL: 10</span>
-                    <span>DANO DO TIME: 1000 DPS</span>
-                </div>
-
-                <!-- MEUS POKEMON -->
-                <div class="flex flex-col gap-2">
-                    <div class="w-full bg-slate-300 rounded p-2">
-                        Pedrinho
+                    </div>
+                    <div class="flex flex-col w-2/3 justify-between items-center h-full">
+                        <div class="flex-1 w-full h-full p-2">
+                            <div class="border-3 border-neutral-700 rounded-lg overflow-hidden w-full h-full">
+                                <button
+                                    class="p-2 bg-amber-400 border-b-3 border-amber-700 w-full hover:bg-amber-400/80 h-full hover:border-amber-700/80 active:bg-amber-400/60 active:border-amber-700/60">
+                                    + Pokebola ($100)</button>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col bg-slate-400 p-1 px-2 border-t-3 border-l-3 border-slate-500 w-full rounded-tl-lg">
+                            <div class="flex gap-2 justify-between">
+                                <span>Pokebolas</span>
+                                <span>100</span>
+                            </div>
+                            <div class="flex gap-2 justify-between">
+                                <span>Pokedolares</span>
+                                <span>$1000000000000000000000000</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="w-full bg-slate-300 rounded p-2">
-                        Pedrinho
+                </div>
+                <!-- MEU TIME -->
+                <div class="bg-gray-200 border-3 border-slate-500 rounded-lg h-4/5">
+                    <!-- ESTATISTICAS -->
+                    <div class="flex justify-between p-4">
+                        <div class="flex flex-col">
+                            <span>DANO PESSOAL: 10</span>
+                            <span>DANO DO TIME: 1000 DPS</span>
+                        </div>
+                    </div>
+
+                    <!-- MEUS POKEMON -->
+                    <div class="flex flex-col gap-2">
+                        <div class="flex w-full">
+                            <div class="w-2"></div>
+                            <div
+                                class="w-full bg-slate-400 border-3 border-neutral-700 border-r-0 rounded rounded-r-none p-2 flex">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+                                    class="z-1 scale-200 [image-rendering:pixelated]">
+                                <div class="flex flex-1 flex-col justify-between">
+                                    <div class="flex justify-between">
+                                        <div>Charmander Lv. 23</div>
+                                        <div class="flex gap-2">
+                                            <div class="flex flex-col">
+                                                <span>Ataque: 23</span>
+                                                <span>Defesa: 20</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span>Velocidade: 10</span>
+                                                <div class="rounded-xl border-2 border-neutral-700 overflow-hidden">
+                                                    <div class="bg-red-400 border-1 border-slate-200 rounded-xl">
+                                                        <p class="text-center">Fogo</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span>HP:</span>
+                                            <div class="w-full h-3 bg-slate-700 border-2 border-neutral-700">
+                                                <div class="h-2 bg-green-400" style="width: 45%;"></div>
+                                            </div>
+                                            <span>100/100</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span>XP:</span>
+                                            <div class="w-full h-3 bg-slate-700 border-2 border-neutral-700">
+                                                <div class="h-2 bg-yellow-400" style="width: 75%;"></div>
+                                            </div>
+                                            <span>100/100</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex w-full">
+                            <div class="w-2"></div>
+                            <div
+                                class="w-full bg-slate-400 border-3 border-neutral-700 border-r-0 rounded rounded-r-none p-2 flex">
+                                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+                                    class="z-1 scale-200 [image-rendering:pixelated]">
+                                <div class="flex flex-1 flex-col justify-between">
+                                    <div class="flex justify-between">
+                                        <div>Charmander Lv. 23</div>
+                                        <div class="flex gap-2">
+                                            <div class="flex flex-col">
+                                                <span>Ataque: 23</span>
+                                                <span>Defesa: 20</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span>Velocidade: 10</span>
+                                                <span>Tipagem</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <span>HP:</span>
+                                            <div class="w-full h-3 bg-slate-700 border-2 border-neutral-700">
+                                                <div class="h-2 bg-green-400" style="width: 45%;"></div>
+                                            </div>
+                                            <span>100/100</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span>XP:</span>
+                                            <div class="w-full h-3 bg-slate-700 border-2 border-neutral-700">
+                                                <div class="h-2 bg-yellow-400" style="width: 75%;"></div>
+                                            </div>
+                                            <span>100/100</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
