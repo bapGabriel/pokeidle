@@ -3,7 +3,7 @@ import { Pokemon } from "./Pokemon.js";
 export function PokemonEnemy() {
 	Pokemon.call(this);
 
-	this.goldAwarded = 0;
+	this.goldAwarded = 1;
 }
 
 PokemonEnemy.prototype = Object.create(Pokemon.prototype);

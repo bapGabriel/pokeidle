@@ -96,9 +96,18 @@
                     <div class="flex flex-col items-center w-full gap-2">
                         <div class="flex w-full">
                             <div class="w-full overflow-hidden border-l-0 rounded-r-lg border-3 border-neutral-700">
-                                <div class="p-2 bg-slate-400 text-gray-100">
-                                    <span id="pokemon-enemy-name" class="capitalize">Charmander</span>
-                                    <span id="pokemon-enemy-level">Lv. 50</span>
+                                <div class="flex items-center justify-between p-2 bg-slate-400">
+                                    <div>
+                                        <span id="pokemon-enemy-name" class="capitalize">Pokémon Inimigo</span>
+                                        <span id="pokemon-enemy-level" class="text-black/35">Lv. ?</span>
+                                    </div>
+
+                                    <div class="overflow-hidden border-2 rounded-xl border-neutral-700">
+                                        <div class="border-1 border-slate-200 rounded-xl">
+                                            <p id="pokemon-enemy-type" class="px-2 text-center">Tipagem
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="flex items-center gap-2 p-2 bg-slate-200">
                                     <span>HP:</span>
@@ -106,7 +115,7 @@
                                         <div id="pokemon-enemy-health-bar" class="h-2 bg-green-400">
                                         </div>
                                     </div>
-                                    <span id="pokemon-enemy-health">100/100</span>
+                                    <span id="pokemon-enemy-health">?/?</span>
                                 </div>
                             </div>
                             <div class="w-2"></div>
@@ -188,7 +197,7 @@
                                     <span class="text-gray-100">Atributos e Estatísticas</span>
                                 </div>
                                 <div class="grid items-center grid-cols-4 gap-2 p-2 bg-slate-200">
-                                    <span>DANO PESSOAL: </span><span id="stats-player-attack">10</span>
+                                    <span>DANO PESSOAL: </span><span id="stats-player-attack">0</span>
                                     <span>DANO DO TIME: </span><span id="stats-player-dps">1000</span>
                                     <span>DINHEIRO OBTIDO: </span><span id="stats-player-money-multiplier">1000</span>
                                     <span>TAXA DE CAPTURA: </span><span id="stats-player-capture-multiplier">1000</span>
@@ -199,52 +208,8 @@
                     </div>
 
                     <!-- MEUS POKEMON -->
-                    <div class="flex flex-col flex-1 min-h-0 gap-2 overflow-y-scroll">
-                        <div id="pokemon" class="flex w-full">
-                            <div class="w-2"></div>
-                            <div
-                                class="flex w-full overflow-hidden border-r-0 rounded-lg rounded-r-none bg-slate-400 border-3 border-neutral-700">
-                                <div class="h-full border-r-3 border-neutral-700 aspect-square">
-                                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/744.png"
-                                        class="h-full w-full bg-slate-200 [image-rendering:pixelated]">
-                                </div>
-                                <div class="flex flex-col justify-between flex-1 px-2">
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col justify-between">
-                                            <span>Charmander Lv. 23</span>
-                                            <div class="overflow-hidden border-2 rounded-xl border-neutral-700">
-                                                <div class="bg-red-400 border-1 border-slate-200 rounded-xl">
-                                                    <p class="text-center">Tipagem</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="grid items-center grid-cols-2 gap-y-0.5 gap-x-2">
-                                            <span>Ataque: 23</span>
-                                            <span>Defesa: 20</span>
-                                            <span>Velocidade: 10</span>
-                                            <span>Regeneração: 10</span>
+                    <div id="player-pokemon-set" class="flex flex-col flex-1 min-h-0 gap-2 overflow-y-scroll">
 
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex items-center gap-2">
-                                            <span>HP:</span>
-                                            <div class="w-full h-3 border-2 bg-slate-700 border-neutral-700">
-                                                <div class="h-2 bg-green-400" style="width: 45%;"></div>
-                                            </div>
-                                            <span>100/100</span>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <span>XP:</span>
-                                            <div class="w-full h-3 border-2 bg-slate-700 border-neutral-700">
-                                                <div class="h-2 bg-yellow-400" style="width: 75%;"></div>
-                                            </div>
-                                            <span>100/100</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

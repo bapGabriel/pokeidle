@@ -66,6 +66,8 @@ Pokemon.prototype.getType = async function () {
 			POKEMONTYPES.types[this.type].name = data.name;
 			POKEMONTYPES.types[this.type].strongAgainst = data.name;
 			POKEMONTYPES.types[this.type].weakAgainst = data.name;
+
+			return POKEMONTYPES.types[this.type];
 		} catch (error) {}
 	}
 };

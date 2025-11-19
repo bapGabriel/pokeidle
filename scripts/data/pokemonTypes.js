@@ -6,7 +6,18 @@ export const POKEMONTYPES = {
 			weakAgainst: "",
 		},
 	},
-	translation: {
-		fire: "fogo",
+	visual: {
+		fire: {
+			translation: "fogo",
+			hexColor: "#FF0000",
+		},
+		grass: {
+			translation: "grama",
+			hexColor: "#00FF00",
+		},
+		water: {
+			translation: "água",
+			hexColor: "#0000FF",
+		},
 	},
 };

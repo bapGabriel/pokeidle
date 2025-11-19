@@ -21,6 +21,7 @@ export function BattleManager(initialStages) {
 		const enemyPokemon = new PokemonEnemy();
 
 		await enemyPokemon.create(enemyIndex, currentStage.selectPokemonLevel());
+		await enemyPokemon.getType();
 
 		this.currentEnemy = enemyPokemon;
 		this.isLoading = false;
@@ -30,5 +31,15 @@ export function BattleManager(initialStages) {
 		document.getElementById("pokemon-enemy-level").innerText = `Lv. ${this.currentEnemy.level}`;
 		document.getElementById("pokemon-enemy-health").innerText = `${this.currentEnemy.health}/${this.currentEnemy.maxHealth}`;
 		document.getElementById("pokemon-enemy-health-bar").style.width = `${Math.floor((this.currentEnemy.health / this.currentEnemy.maxHealth) * 100)}%`;
+	};
+
+	this.handleEnemyDefeat = function (gamePokedollars) {
+		gamePokedollars.add(this.currentEnemy.goldAwarded);
+
+		this.currentEnemy = null;
+
+		if (!this.isLoading) {
+			this.loadNextEnemy();
+		}
 	};
 }
