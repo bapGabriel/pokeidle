@@ -33,11 +33,19 @@ export const API = {
 	},
 
 	getType: async (index) => {
-		if (POKEMONTYPES.types[this.type]) {
-			return POKEMONTYPES.types[this.type];
+		if (POKEMONTYPES.types[index]) {
+			return POKEMONTYPES.types[index];
 		} else {
 			const data = await fetchTypeData(index);
-			POKEMONTYPES[index] = data;
+			POKEMONTYPES.types[index] = {
+				name: data.name,
+				doubleDamageFrom: [],
+				doubleDamageTo: [],
+				halfDamageFrom: [],
+				halfDamageTo: [],
+				noDamageFrom: [],
+				noDamageTo: [],
+			};
 
 			return data;
 		}

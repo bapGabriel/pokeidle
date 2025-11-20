@@ -1,3 +1,4 @@
+import { CONFIG } from "../config.js";
 import { BattleManager } from "./BattleManager.js";
 import { Player } from "./Player.js";
 import { PokemonAlly } from "./PokemonAlly.js";
@@ -39,7 +40,7 @@ Game.prototype.renderGame = function () {
 	if (this.battleManager.currentEnemy) {
 		const enemy = this.battleManager.currentEnemy;
 
-		document.getElementById("pokemon-enemy-health").innerText = `${enemy.health}/${enemy.maxHealth}`;
+		document.getElementById("pokemon-enemy-health").innerText = `${Math.floor(enemy.health)}/${Math.floor(enemy.maxHealth)}`;
 
 		const healthPercentage = (enemy.health / enemy.maxHealth) * 100;
 		document.getElementById("pokemon-enemy-health-bar").style.width = `${Math.max(0, healthPercentage)}%`;
@@ -49,17 +50,44 @@ Game.prototype.renderGame = function () {
 	document.getElementById("resource-pokedollars-quantity").innerText = `$${Math.floor(this.pokedollars.quantity)}`;
 
 	document.getElementById("stats-player-attack").innerText = this.player.attack;
+
+	this.player.pokemonSet.forEach((ally) => {
+		if (document.getElementById(`pokemon-ally-${ally.id}`)) {
+			document.getElementById(`pokemon-ally-level-${ally.id}`).innerText = `Lv. ${Math.floor(ally.level)}`;
+			document.getElementById(`pokemon-ally-attack-${ally.id}`).innerText = `${Math.floor(ally.attack)}`;
+			document.getElementById(`pokemon-ally-defense-${ally.id}`).innerText = `${Math.floor(ally.defense)}`;
+			document.getElementById(`pokemon-ally-speed-${ally.id}`).innerText = `${Math.floor(ally.speed)}`;
+			document.getElementById(`pokemon-ally-regen-${ally.id}`).innerText = `${Math.floor(ally.regen)}`;
+			document.getElementById(`pokemon-ally-health-${ally.id}`).innerText = `${Math.floor(ally.health)}/${Math.floor(ally.maxHealth)}`;
+			document.getElementById(`pokemon-ally-exp-${ally.id}`).innerText = `${Math.floor(ally.experience)}/${Math.floor(CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, ally.level))}`;
+
+			const healthPercentage = (ally.health / ally.maxHealth) * 100;
+			const expPercentage = (ally.experience / (CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, ally.level))) * 100;
+
+			document.getElementById(`pokemon-ally-health-bar-${ally.id}`).style.width = `${Math.max(0, healthPercentage)}%`;
+			document.getElementById(`pokemon-ally-exp-bar-${ally.id}`).style.width = `${Math.max(0, expPercentage)}%`;
+		}
+	});
 };
 
 Game.prototype.processGameLogic = function (deltaTime) {
 	this.pokedollars.add(1 * deltaTime);
 
+	if (this.battleManager.currentEnemy) {
+		this.battleManager.currentEnemy.regenerate(deltaTime);
+		this.player.pokemonSet.forEach((ally) => {
+			ally.regenerate();
+		});
+
+		this.battleManager.handleAllyAutoAttacks(this.player, deltaTime);
+		this.battleManager.handleEnemyAutoAttacks(this.player, deltaTime);
+	}
+
 	if (this.battleManager.currentEnemy && this.battleManager.currentEnemy.health <= 0) {
 		this.battleManager.handleEnemyDefeat(this.pokedollars);
 	}
 
-	if (this.battleManager.currentEnemy) {
-	}
+	this.cleanupDeadAllies();
 };
 
 Game.prototype.setupEventListeners = function () {
@@ -98,10 +126,28 @@ Game.prototype.playerCapture = function () {
 
 			const capturedPokemon = new PokemonAlly();
 			capturedPokemon.clonePokemon(enemy);
+			console.log("capturedPokemon: ", capturedPokemon);
+
 			capturedPokemon.createDisplay();
 			this.player.pokemonSet.push(capturedPokemon);
 			this.battleManager.currentEnemy = null;
 			this.battleManager.loadNextEnemy();
 		}
 	}
+};
+
+Game.prototype.cleanupDeadAllies = function () {
+	this.player.pokemonSet = this.player.pokemonSet.filter((ally) => {
+		if (ally.health <= 0) {
+			const allyDiv = document.getElementById(`pokemon-ally-${ally.id}`);
+
+			if (allyDiv) {
+				allyDiv.remove();
+			}
+
+			return false;
+		} else {
+			return true;
+		}
+	});
 };

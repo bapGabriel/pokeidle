@@ -22,6 +22,8 @@ export function Pokemon() {
 
 	this.type = 0;
 	this.level = 0;
+
+	this.attackTimer = 0;
 }
 
 Pokemon.prototype.create = async function (pokemon, level = 1) {
@@ -46,7 +48,8 @@ Pokemon.prototype.create = async function (pokemon, level = 1) {
 		this.baseSpeed = this.speed;
 		this.baseRegen = this.regen;
 
-		this.type = data.types[0].type.url;
+		const typeURL = data.types[0].type.url.split("/");
+		this.type = typeURL.pop() || typeURL.pop();
 		this.level = level;
 
 		this.levelScale();
@@ -57,19 +60,8 @@ Pokemon.prototype.create = async function (pokemon, level = 1) {
 };
 
 Pokemon.prototype.getType = async function () {
-	if (POKEMONTYPES.types[this.type]) {
-		return POKEMONTYPES.types[this.type];
-	} else {
-		try {
-			data = await API.getType(this.type);
-
-			POKEMONTYPES.types[this.type].name = data.name;
-			POKEMONTYPES.types[this.type].strongAgainst = data.name;
-			POKEMONTYPES.types[this.type].weakAgainst = data.name;
-
-			return POKEMONTYPES.types[this.type];
-		} catch (error) {}
-	}
+	const data = await API.getType(this.type);
+	return data;
 };
 
 Pokemon.prototype.levelScale = function () {
@@ -82,7 +74,27 @@ Pokemon.prototype.levelScale = function () {
 };
 
 Pokemon.prototype.takeDamage = function (damage) {
-	this.health -= damage;
+	const defenseMultiplier = 0.5;
+	const minDamage = 1;
+
+	const damageReduction = this.defense * defenseMultiplier;
+
+	const finalDamage = Math.max(minDamage, damage - damageReduction);
+
+	console.log(`${this.name} took ${finalDamage} damage points! Current Health: ${this.health}/${this.maxHealth}`);
+
+	this.health -= finalDamage;
 
 	if (this.health < 0) this.health = 0;
+
+	this.takeDamageAnimation();
+};
+
+Pokemon.prototype.regenerate = function (deltaTime) {
+	if (this.health < this.maxHealth) {
+		this.health += this.regen / 60;
+	}
+	if (this.health >= this.maxHealth) {
+		this.health = this.maxHealth;
+	}
 };

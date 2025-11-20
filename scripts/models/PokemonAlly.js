@@ -1,4 +1,5 @@
 import { CONFIG } from "../config.js";
+import { POKEMONTYPES } from "../data/pokemonTypes.js";
 import { Pokemon } from "./Pokemon.js";
 
 export function PokemonAlly() {
@@ -16,7 +17,7 @@ PokemonAlly.prototype.clonePokemon = function (pokemon) {
 	this.sprite = pokemon.sprite;
 
 	this.maxHealth = pokemon.maxHealth;
-	this.health = this.health;
+	this.health = this.maxHealth;
 
 	this.attack = pokemon.attack;
 	this.defense = pokemon.defense;
@@ -33,14 +34,19 @@ PokemonAlly.prototype.clonePokemon = function (pokemon) {
 	this.level = pokemon.level;
 };
 
-PokemonAlly.prototype.createDisplay = function () {
+PokemonAlly.prototype.performAutoAttack = function (target) {
+	target.takeDamage(this.attack);
+};
+
+PokemonAlly.prototype.createDisplay = async function () {
+	const typeData = await this.getType();
 	const pokemonDiv = document.createElement("div");
 	pokemonDiv.innerHTML = `<div id="pokemon-ally-${this.id}" class="flex w-full">
                                         <div class="w-2"></div>
                                         <div
                                             class="flex w-full overflow-hidden border-r-0 rounded-lg rounded-r-none bg-slate-400 border-3 border-neutral-700">
                                             <div class="h-full border-r-3 border-neutral-700 aspect-square">
-                                                <img id="pokemon-ally-health-${this.id}" src="${this.sprite}"
+                                                <img src="${this.sprite}"
                                                     class="h-full w-full bg-slate-200 [image-rendering:pixelated]">
                                             </div>
                                             <div class="flex flex-col justify-between flex-1 px-2">
@@ -48,11 +54,11 @@ PokemonAlly.prototype.createDisplay = function () {
                                                     <div class="flex flex-col justify-between">
                                                         <div>
                                                             <span id="pokemon-ally-name-${this.id}" class="capitalize">${this.name}</span>
-                                                            <span>Lv. ${this.level}</span>
+                                                            <span id="pokemon-ally-level-${this.id}">Lv. ${this.level}</span>
                                                         </div>
                                                         <div class="overflow-hidden border-2 rounded-xl border-neutral-700">
-                                                            <div class="bg-red-400 border-1 border-slate-200 rounded-xl">
-                                                                <p class="text-center">Tipagem</p>
+                                                            <div style="background-color: ${POKEMONTYPES.visual[typeData.name].hexColor};" class="bg-red-400 border-1 border-slate-200 rounded-xl">
+                                                                <p class="capitalize text-center">${POKEMONTYPES.visual[typeData.name].translation}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -82,18 +88,22 @@ PokemonAlly.prototype.createDisplay = function () {
                                                         <div class="w-full h-3 border-2 bg-slate-700 border-neutral-700">
                                                             <div id="pokemon-ally-health-bar-${this.id}" class="h-2 bg-green-400" style="width: 100%;"></div>
                                                         </div>
-                                                        <span>${Math.floor(this.health)}/${Math.floor(this.maxHealth)}</span>
+                                                        <span id="pokemon-ally-health-${this.id}">${Math.floor(this.health)}/${Math.floor(this.maxHealth)}</span>
                                                     </div>
                                                     <div class="flex items-center gap-2">
                                                         <span>XP:</span>
                                                         <div class="w-full h-3 border-2 bg-slate-700 border-neutral-700">
                                                             <div id="pokemon-ally-exp-bar-${this.id}" class="h-2 bg-yellow-400" style="width: 0%;"></div>
                                                         </div>
-                                                        <span>${Math.floor(this.experience)}/${Math.floor(CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, this.level))}</span>
+                                                        <span id="pokemon-ally-exp-${this.id}">${Math.floor(this.experience)}/${Math.floor(CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, this.level))}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>`;
 	document.getElementById("player-pokemon-set").append(pokemonDiv);
+};
+
+PokemonAlly.prototype.takeDamageAnimation = function () {
+	return;
 };

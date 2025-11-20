@@ -42,4 +42,31 @@ export function BattleManager(initialStages) {
 			this.loadNextEnemy();
 		}
 	};
+
+	this.handleAllyAutoAttacks = function (player, deltaTime) {
+		const target = this.currentEnemy;
+
+		player.pokemonSet.forEach((ally) => {
+			ally.attackTimer += deltaTime;
+
+			const requiredCooldown = 60 / ally.speed;
+
+			if (ally.attackTimer >= requiredCooldown) {
+				ally.performAutoAttack(target);
+
+				ally.attackTimer -= requiredCooldown;
+			}
+		});
+	};
+
+	this.handleEnemyAutoAttacks = function (player, deltaTime) {
+		this.currentEnemy.attackTimer += deltaTime;
+		const requiredCooldown = 60 / this.currentEnemy.speed;
+
+		if (this.currentEnemy.attackTimer >= requiredCooldown) {
+			this.currentEnemy.performAutoAttack(player.pokemonSet);
+
+			this.currentEnemy.attackTimer -= requiredCooldown;
+		}
+	};
 }

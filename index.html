@@ -21,6 +21,24 @@
         }
     </style>
     <style>
+        @keyframes pulse-red {
+            0% {
+                filter: brightness(100%);
+            }
+
+            50% {
+                filter: brightness(150%) hue-rotate(-20deg) drop-shadow(0 0 5px red);
+            }
+
+            100% {
+                filter: brightness(100%);
+            }
+        }
+
+        .damage-pulse {
+            animation: pulse-red 0.05s ease-out 1;
+        }
+
         .mask-radial {
             mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 0%);
             -webkit-mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 0%);
@@ -54,7 +72,7 @@
 
                 <!-- POKÉMON INIMIGO -->
                 <div class="flex flex-col items-center justify-between flex-1 h-auto gap-2">
-                    <div class="flex flex-col items-center justify-center flex-1 w-full">
+                    <div id="enemy-container" class="flex flex-col items-center justify-center flex-1 w-full">
                         <!-- SPRITE -->
                         <img id="pokemon-enemy-image" class="absolute z-1 h-1/2 [image-rendering:pixelated]">
 
@@ -197,10 +215,19 @@
                                     <span class="text-gray-100">Atributos e Estatísticas</span>
                                 </div>
                                 <div class="grid items-center grid-cols-4 gap-2 p-2 bg-slate-200">
-                                    <span>DANO PESSOAL: </span><span id="stats-player-attack">0</span>
-                                    <span>DANO DO TIME: </span><span id="stats-player-dps">1000</span>
-                                    <span>DINHEIRO OBTIDO: </span><span id="stats-player-money-multiplier">1000</span>
-                                    <span>TAXA DE CAPTURA: </span><span id="stats-player-capture-multiplier">1000</span>
+                                    <div>
+                                        <span>DANO PESSOAL: </span><span id="stats-player-attack">0</span>
+                                    </div>
+                                    <div>
+                                        <span>DANO DO TIME: </span><span id="stats-player-dps">0</span>
+                                    </div>
+                                    <div>
+                                        <span>DINHEIRO OBTIDO: </span><span id="stats-player-money-multiplier">0</span>
+                                    </div>
+                                    <div>
+                                        <span>TAXA DE CAPTURA: </span><span
+                                            id="stats-player-capture-multiplier">0</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="w-2"></div>
