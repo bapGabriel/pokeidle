@@ -33,8 +33,16 @@ export function BattleManager(initialStages) {
 		document.getElementById("pokemon-enemy-health-bar").style.width = `${Math.floor((this.currentEnemy.health / this.currentEnemy.maxHealth) * 100)}%`;
 	};
 
-	this.handleEnemyDefeat = function (gamePokedollars) {
+	this.handleEnemyDefeat = function (gamePokedollars, player, stage) {
 		gamePokedollars.add(this.currentEnemy.goldAwarded);
+
+		player.pokemonSet.forEach((ally) => {
+			ally.gainExperience(this.currentEnemy.awardExperience());
+		});
+
+		const currentStage = this.getCurrentStageConfig();
+
+		currentStage.gainThreat();
 
 		this.currentEnemy = null;
 

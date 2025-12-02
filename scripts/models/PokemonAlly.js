@@ -107,3 +107,13 @@ PokemonAlly.prototype.createDisplay = async function () {
 PokemonAlly.prototype.takeDamageAnimation = function () {
 	return;
 };
+
+PokemonAlly.prototype.gainExperience = function (value) {
+	this.experience += value;
+	const experienceRequired = Math.floor(CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, this.level));
+	if (this.experience >= experienceRequired) {
+		this.experience -= experienceRequired;
+		this.level += 1;
+		this.levelScale();
+	}
+};

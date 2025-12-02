@@ -24,6 +24,7 @@ export function Pokemon() {
 	this.level = 0;
 
 	this.attackTimer = 0;
+	this.isDead = false;
 }
 
 Pokemon.prototype.create = async function (pokemon, level = 1) {
@@ -81,16 +82,18 @@ Pokemon.prototype.takeDamage = function (damage) {
 
 	const finalDamage = Math.max(minDamage, damage - damageReduction);
 
-	console.log(`${this.name} took ${finalDamage} damage points! Current Health: ${this.health}/${this.maxHealth}`);
-
 	this.health -= finalDamage;
 
-	if (this.health < 0) this.health = 0;
+	if (this.health < 0) {
+		this.isDead = true;
+		this.health = 0;
+	}
 
-	this.takeDamageAnimation();
+	this.takeDamageAnimation(Math.floor(finalDamage));
 };
 
 Pokemon.prototype.regenerate = function (deltaTime) {
+	if (this.isDead) return;
 	if (this.health < this.maxHealth) {
 		this.health += this.regen / 60;
 	}

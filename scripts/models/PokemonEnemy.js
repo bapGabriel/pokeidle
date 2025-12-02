@@ -1,10 +1,11 @@
-import { createSplatterParticle } from "../utils/visual.js";
+import { createDamageParticle, createSplatterParticle } from "../utils/visual.js";
 import { Pokemon } from "./Pokemon.js";
 
 export function PokemonEnemy() {
 	Pokemon.call(this);
 
-	this.goldAwarded = 10;
+	this.goldAwarded = 1;
+	this.expAwarded = 10;
 }
 
 PokemonEnemy.prototype = Object.create(Pokemon.prototype);
@@ -16,7 +17,7 @@ PokemonEnemy.prototype.performAutoAttack = function (targets) {
 	});
 };
 
-PokemonEnemy.prototype.takeDamageAnimation = function () {
+PokemonEnemy.prototype.takeDamageAnimation = function (damageValue) {
 	const spriteElement = document.getElementById("pokemon-enemy-image");
 
 	if (spriteElement) {
@@ -32,9 +33,16 @@ PokemonEnemy.prototype.takeDamageAnimation = function () {
 
 		const gameContainer = document.getElementById("enemy-container");
 
-		const numberOfParticles = 5 + Math.floor(Math.random() * 5);
-		for (let i = 0; i < numberOfParticles; i++) {
-			createSplatterParticle(centerX, centerY, gameContainer);
-		}
+		// const numberOfParticles = 5 + Math.floor(Math.random() * 5);
+		// for (let i = 0; i < numberOfParticles; i++) {
+		// 	createSplatterParticle(centerX, centerY, gameContainer);
+		// }
+
+		createDamageParticle(centerX, centerY, gameContainer, damageValue);
 	}
+};
+
+PokemonEnemy.prototype.awardExperience = function () {
+	const experienceAwarded = this.expAwarded * Math.pow(1.15, this.level);
+	return experienceAwarded;
 };

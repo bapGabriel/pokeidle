@@ -1,3 +1,4 @@
+import { API } from "../api.js";
 import { CONFIG } from "../config.js";
 import { BattleManager } from "./BattleManager.js";
 import { Player } from "./Player.js";
@@ -9,7 +10,7 @@ export function Game() {
 	this.lastUpdateTime = performance.now();
 
 	this.player = new Player("Jogador");
-	this.stages = [new Stage("Rota 1", "", 2, [1, 4, 7])];
+	this.stages = [];
 	this.upgrades = [];
 
 	this.battleManager = new BattleManager(this.stages);
@@ -21,6 +22,9 @@ export function Game() {
 }
 
 Game.prototype.start = async function () {
+	const pokemonFirstStageIds = await API.getAllPokemonByEvolutionStage(1);
+
+	this.stages.push(new Stage("Rota 1", "", 1, pokemonFirstStageIds));
 	await this.battleManager.loadNextEnemy();
 	this.setupEventListeners();
 	window.requestAnimationFrame(this.boundGameLoop);
@@ -68,6 +72,13 @@ Game.prototype.renderGame = function () {
 			document.getElementById(`pokemon-ally-exp-bar-${ally.id}`).style.width = `${Math.max(0, expPercentage)}%`;
 		}
 	});
+
+	const currentStage = this.battleManager.getCurrentStageConfig();
+	const stageThreatPercentage = (currentStage.threat / (CONFIG.BASE_EXPERIENCE * Math.pow(CONFIG.POKEMON_EXPERIENCE_MULTIPLIER, currentStage.level))) * 100;
+
+	document.getElementById(`stage-name`).innerText = `${currentStage.name}`;
+	document.getElementById(`stage-level`).innerText = `Lv. ${currentStage.level}`;
+	document.getElementById("stage-threat-bar").style.width = `${Math.max(0, stageThreatPercentage)}%`;
 };
 
 Game.prototype.processGameLogic = function (deltaTime) {
@@ -84,7 +95,7 @@ Game.prototype.processGameLogic = function (deltaTime) {
 	}
 
 	if (this.battleManager.currentEnemy && this.battleManager.currentEnemy.health <= 0) {
-		this.battleManager.handleEnemyDefeat(this.pokedollars);
+		this.battleManager.handleEnemyDefeat(this.pokedollars, this.player);
 	}
 
 	this.cleanupDeadAllies();
@@ -126,7 +137,6 @@ Game.prototype.playerCapture = function () {
 
 			const capturedPokemon = new PokemonAlly();
 			capturedPokemon.clonePokemon(enemy);
-			console.log("capturedPokemon: ", capturedPokemon);
 
 			capturedPokemon.createDisplay();
 			this.player.pokemonSet.push(capturedPokemon);
