@@ -23,37 +23,44 @@ function Pokemon() {
 	this.isDead = false;
 }
 
-Pokemon.prototype.create = async function (pokemon, level = 1) {
-	try {
-		const data = await API.getPokemon(pokemon);
+Pokemon.prototype.create = function (pokemon, level = 1) {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const data = await API.getPokemon(pokemon);
+	
+			if(!data || !data.sprites || !data.stats){
+				throw new Error("A API retornou uma estrutura de dados inválida.")
+			}
+			
+			this.id = window.crypto.randomUUID();
+			this.name = data.name;
+			this.sprite = data.sprites.front_default;
+	
+			this.maxHealth = data.stats.find((s) => s.stat.name === "hp").base_stat;
+			this.health = this.maxHealth;
+	
+			this.attack = data.stats.find((s) => s.stat.name === "attack").base_stat;
+			this.defense = data.stats.find((s) => s.stat.name === "defense").base_stat;
+			this.speed = data.stats.find((s) => s.stat.name === "speed").base_stat;
+			this.regen = data.stats.find((s) => s.stat.name === "special-defense").base_stat / data.stats.find((s) => s.stat.name === "special-attack").base_stat;
+	
+			this.baseMaxHealth = this.maxHealth;
+			this.baseAttack = this.attack;
+			this.baseDefense = this.defense;
+			this.baseSpeed = this.speed;
+			this.baseRegen = this.regen;
+	
+			const typeURL = data.types[0].type.url.split("/");
+			this.type = typeURL.pop() || typeURL.pop();
+			this.level = level;
+	
+			this.levelScale();
 
-		this.id = window.crypto.randomUUID();
-		this.name = data.name;
-		this.sprite = data.sprites.front_default;
-
-		this.maxHealth = data.stats.find((s) => s.stat.name === "hp").base_stat;
-		this.health = this.maxHealth;
-
-		this.attack = data.stats.find((s) => s.stat.name === "attack").base_stat;
-		this.defense = data.stats.find((s) => s.stat.name === "defense").base_stat;
-		this.speed = data.stats.find((s) => s.stat.name === "speed").base_stat;
-		this.regen = data.stats.find((s) => s.stat.name === "special-defense").base_stat / data.stats.find((s) => s.stat.name === "special-attack").base_stat;
-
-		this.baseMaxHealth = this.maxHealth;
-		this.baseAttack = this.attack;
-		this.baseDefense = this.defense;
-		this.baseSpeed = this.speed;
-		this.baseRegen = this.regen;
-
-		const typeURL = data.types[0].type.url.split("/");
-		this.type = typeURL.pop() || typeURL.pop();
-		this.level = level;
-
-		this.levelScale();
-		console.log("Pokémon carregado: ", this);
-	} catch (error) {
-		console.error("Erro criando Pokémon.", error);
-	}
+			resolve(this);
+		} catch (error) {
+			reject(new Error("Erro criando Pokemon: ", error))
+		}
+	});
 };
 
 Pokemon.prototype.getType = async function () {
@@ -71,12 +78,14 @@ Pokemon.prototype.levelScale = function () {
 };
 
 Pokemon.prototype.takeDamage = function (damage) {
-	const defenseMultiplier = 0.5;
-	const minDamage = 1;
+	// const defenseMultiplier = 0.5;
+	// const minDamage = 1;
 
-	const damageReduction = this.defense * defenseMultiplier;
+	// const damageReduction = this.defense * defenseMultiplier;
 
-	const finalDamage = Math.max(minDamage, damage - damageReduction);
+	// const finalDamage = Math.max(minDamage, damage - damageReduction);
+
+	finalDamage = damage * (damage / (damage + this.defense));
 
 	this.health -= finalDamage;
 

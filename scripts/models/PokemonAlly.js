@@ -31,7 +31,7 @@ PokemonAlly.prototype.clonePokemon = function (pokemon) {
 };
 
 PokemonAlly.prototype.performAutoAttack = function (target) {
-	target.takeDamage(this.attack);
+	target.takeDamage(this.attack / 3);
 };
 
 PokemonAlly.prototype.createDisplay = async function () {

@@ -10,7 +10,7 @@ PokemonEnemy.prototype.constructor = PokemonEnemy;
 
 PokemonEnemy.prototype.performAutoAttack = function (targets) {
 	targets.forEach((target) => {
-		target.takeDamage(this.attack / 10);
+		target.takeDamage(this.attack / 3);
 	});
 };
 
@@ -29,11 +29,6 @@ PokemonEnemy.prototype.takeDamageAnimation = function (damageValue) {
 		const centerY = rect.top + rect.height / 2;
 
 		const gameContainer = document.getElementById("enemy-container");
-
-		// const numberOfParticles = 5 + Math.floor(Math.random() * 5);
-		// for (let i = 0; i < numberOfParticles; i++) {
-		// 	createSplatterParticle(centerX, centerY, gameContainer);
-		// }
 
 		createDamageParticle(centerX, centerY, gameContainer, damageValue);
 	}

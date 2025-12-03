@@ -10,6 +10,7 @@ function BattleManager(initialStages) {
 
 	this.loadNextEnemy = async function () {
 		if (this.isLoading) return;
+		document.getElementById("pokemon-enemy-loading").classList.add("hidden");
 		this.isLoading = true;
 
 		const currentStage = this.getCurrentStageConfig();
@@ -18,17 +19,38 @@ function BattleManager(initialStages) {
 
 		const enemyPokemon = new PokemonEnemy();
 
-		await enemyPokemon.create(enemyIndex, currentStage.selectPokemonLevel());
-		await enemyPokemon.getType();
+		await enemyPokemon
+			.create(enemyIndex, currentStage.selectPokemonLevel())
+			.then(async (pokemon) => {
+				document.getElementById("event-log").innerText = `Um ${pokemon.name} selvagem aparece!`;
+				await enemyPokemon.getType();
+			})
+			.catch((error) => {
+				pokemon.id = -1;
+				pokemon.name = "MISSINGNO";
+				pokemon.level = Infinity;
+				pokemon.sprite = "#";
 
-		this.currentEnemy = enemyPokemon;
-		this.isLoading = false;
+				pokemon.maxHealth = Infinity;
+				pokemon.health = Infinity;
+				pokemon.attack = Infinity;
+				pokemon.defense = Infinity;
+				pokemon.speed = Infinity;
+				pokemon.regen = Infinity;
 
-		document.getElementById("pokemon-enemy-image").src = this.currentEnemy.sprite;
-		document.getElementById("pokemon-enemy-name").innerText = this.currentEnemy.name;
-		document.getElementById("pokemon-enemy-level").innerText = `Lv. ${this.currentEnemy.level}`;
-		document.getElementById("pokemon-enemy-health").innerText = `${this.currentEnemy.health}/${this.currentEnemy.maxHealth}`;
-		document.getElementById("pokemon-enemy-health-bar").style.width = `${Math.floor((this.currentEnemy.health / this.currentEnemy.maxHealth) * 100)}%`;
+				document.getElementById("event-log").innerText = `!!! P3R1G% ! 3RR# !!!`;
+			})
+			.finally(() => {
+				this.currentEnemy = enemyPokemon;
+				document.getElementById("pokemon-enemy-loading").classList.add("hidden");
+				this.isLoading = false;
+
+				document.getElementById("pokemon-enemy-image").src = this.currentEnemy.sprite;
+				document.getElementById("pokemon-enemy-name").innerText = this.currentEnemy.name;
+				document.getElementById("pokemon-enemy-level").innerText = `Lv. ${this.currentEnemy.level}`;
+				document.getElementById("pokemon-enemy-health").innerText = `${this.currentEnemy.health}/${this.currentEnemy.maxHealth}`;
+				document.getElementById("pokemon-enemy-health-bar").style.width = `${Math.floor((this.currentEnemy.health / this.currentEnemy.maxHealth) * 100)}%`;
+			});
 	};
 
 	this.handleEnemyDefeat = function (gamePokedollars, player, stage) {
@@ -45,6 +67,7 @@ function BattleManager(initialStages) {
 		this.currentEnemy = null;
 
 		if (!this.isLoading) {
+			document.getElementById("pokemon-enemy-loading").classList.remove("hidden");
 			this.loadNextEnemy();
 		}
 	};

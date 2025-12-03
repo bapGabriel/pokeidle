@@ -96,12 +96,10 @@ Game.prototype.processGameLogic = function (deltaTime) {
 Game.prototype.setupEventListeners = function () {
 	const attackButton = document.getElementById("action-attack-enemy");
 	const captureButton = document.getElementById("action-capture-enemy");
-	if (attackButton) {
-		attackButton.addEventListener("click", this.playerAttack.bind(this));
-	}
-	if (captureButton) {
-		captureButton.addEventListener("click", this.playerCapture.bind(this));
-	}
+	const pokeballBuyButton = document.getElementById("pokeball-buy");
+	if (attackButton) attackButton.addEventListener("click", this.playerAttack.bind(this));
+	if (captureButton) captureButton.addEventListener("click", this.playerCapture.bind(this));
+	if (pokeballBuyButton) pokeballBuyButton.addEventListener("click", this.playerBuyPokeball.bind(this));
 };
 
 Game.prototype.playerAttack = function () {
@@ -135,6 +133,17 @@ Game.prototype.playerCapture = function () {
 			this.battleManager.currentEnemy = null;
 			this.battleManager.loadNextEnemy();
 		}
+	}
+};
+
+Game.prototype.playerBuyPokeball = function () {
+	if(this.pokedollars.quantity >= 100){
+		this.pokedollars.quantity -= 100;
+		this.pokeballs.quantity++;
+		console.log("Comprou a bola");
+	}else{
+		console.log("tu é pobre fi");
+		
 	}
 };
 
