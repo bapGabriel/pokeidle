@@ -1,4 +1,4 @@
-export function Resource(name, initialQuantity = 0) {
+function Resource(name, initialQuantity = 0) {
 	this.name = name;
 	this.quantity = initialQuantity;
 

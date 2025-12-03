@@ -1,6 +1,4 @@
-import { PokemonEnemy } from "./PokemonEnemy.js";
-
-export function BattleManager(initialStages) {
+function BattleManager(initialStages) {
 	this.stages = initialStages;
 	this.currentStageIndex = 0;
 	this.isLoading = false;

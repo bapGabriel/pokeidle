@@ -1,7 +1,3 @@
-import { CONFIG } from "./config.js";
-import { POKEMONCACHE } from "./data/pokemonCache.js";
-import { POKEMONTYPES } from "./data/pokemonTypes.js";
-
 async function fetchPokemonData(index) {
 	return fetch(`${CONFIG.API_URL}/pokemon/${index}`)
 		.then((response) => response.json())
@@ -20,7 +16,7 @@ async function fetchTypeData(index) {
 		.finally(() => {});
 }
 
-export const API = {
+const API = {
 	getPokemon: async (index) => {
 		if (POKEMONCACHE[index]) {
 			return POKEMONCACHE[index];

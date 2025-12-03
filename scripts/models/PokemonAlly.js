@@ -1,8 +1,4 @@
-import { CONFIG } from "../config.js";
-import { POKEMONTYPES } from "../data/pokemonTypes.js";
-import { Pokemon } from "./Pokemon.js";
-
-export function PokemonAlly() {
+function PokemonAlly() {
 	Pokemon.call(this);
 
 	this.experience = 0;

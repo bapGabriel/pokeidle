@@ -1,12 +1,4 @@
-import { API } from "../api.js";
-import { CONFIG } from "../config.js";
-import { BattleManager } from "./BattleManager.js";
-import { Player } from "./Player.js";
-import { PokemonAlly } from "./PokemonAlly.js";
-import { Resource } from "./Resource.js";
-import { Stage } from "./Stage.js";
-
-export function Game() {
+function Game() {
 	this.lastUpdateTime = performance.now();
 
 	this.player = new Player("Jogador");

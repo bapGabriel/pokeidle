@@ -1,4 +1,4 @@
-export const CONFIG = {
+const CONFIG = {
 	API_URL: "https://pokeapi.co/api/v2",
 	BASE_EXPERIENCE: 100,
 	POKEMON_EXPERIENCE_MULTIPLIER: 1.15,

@@ -1,8 +1,4 @@
-import { API } from "../api.js";
-import { CONFIG } from "../config.js";
-import { POKEMONTYPES } from "../data/pokemonTypes.js";
-
-export function Pokemon() {
+function Pokemon() {
 	this.id = "";
 	this.name = "";
 	this.sprite = "";

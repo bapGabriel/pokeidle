@@ -1,1 +1,1 @@
-export function Upgrade(id, baseCost, multiplier) {}
+function Upgrade(id, baseCost, multiplier) {}

@@ -1,7 +1,4 @@
-import { createDamageParticle, createSplatterParticle } from "../utils/visual.js";
-import { Pokemon } from "./Pokemon.js";
-
-export function PokemonEnemy() {
+function PokemonEnemy() {
 	Pokemon.call(this);
 
 	this.goldAwarded = 1;

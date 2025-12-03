@@ -1,1 +1,1 @@
-export const POKEMONCACHE = {};
+const POKEMONCACHE = {};

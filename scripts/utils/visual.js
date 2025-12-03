@@ -1,4 +1,4 @@
-export function createSplatterParticle(originX, originY, containerElement) {
+function createSplatterParticle(originX, originY, containerElement) {
 	const particle = document.createElement("div");
 
 	const startX = originX + (Math.random() - 0.5) * 20;
@@ -38,7 +38,7 @@ export function createSplatterParticle(originX, originY, containerElement) {
 	};
 }
 
-export function createDamageParticle(originX, originY, containerElement, damageValue) {
+function createDamageParticle(originX, originY, containerElement, damageValue) {
 	const particle = document.createElement("div");
 
 	const startX = originX + (Math.random() - 0.5) * 20;

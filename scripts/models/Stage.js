@@ -1,6 +1,4 @@
-import { CONFIG } from "../config.js";
-
-export function Stage(name, image, level, pokemonPool) {
+function Stage(name, image, level, pokemonPool) {
 	this.id = window.crypto.randomUUID();
 	this.name = name;
 	this.image = image;

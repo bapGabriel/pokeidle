@@ -1,4 +1,4 @@
-export const POKEMONTYPES = {
+const POKEMONTYPES = {
 	types: {
 		0: {
 			name: "",

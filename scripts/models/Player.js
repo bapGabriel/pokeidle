@@ -1,6 +1,4 @@
-import { CONFIG } from "../config.js";
-
-export function Player(name) {
+function Player(name) {
 	this.name = name;
 	this.attack = CONFIG.PLAYER_INITIAL_ATTACK;
 	this.pokemonSet = [];
