@@ -15,6 +15,7 @@ function Game() {
 
 Game.prototype.start = async function () {
 	const pokemonFirstStageIds = await API.getAllPokemonByEvolutionStage(1);
+	// pokemonFirstStageIds.push(-1);
 
 	this.stages.push(new Stage("Rota 1", "", 1, pokemonFirstStageIds));
 	await this.battleManager.loadNextEnemy();
@@ -137,13 +138,12 @@ Game.prototype.playerCapture = function () {
 };
 
 Game.prototype.playerBuyPokeball = function () {
-	if(this.pokedollars.quantity >= 100){
+	if (this.pokedollars.quantity >= 100) {
 		this.pokedollars.quantity -= 100;
 		this.pokeballs.quantity++;
 		console.log("Comprou a bola");
-	}else{
+	} else {
 		console.log("tu é pobre fi");
-		
 	}
 };
 

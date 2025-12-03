@@ -26,17 +26,17 @@ function BattleManager(initialStages) {
 				await enemyPokemon.getType();
 			})
 			.catch((error) => {
-				pokemon.id = -1;
-				pokemon.name = "MISSINGNO";
-				pokemon.level = Infinity;
-				pokemon.sprite = "#";
+				enemyPokemon.id = -1;
+				enemyPokemon.name = "MISSINGNO";
+				enemyPokemon.level = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.sprite = "#";
 
-				pokemon.maxHealth = Infinity;
-				pokemon.health = Infinity;
-				pokemon.attack = Infinity;
-				pokemon.defense = Infinity;
-				pokemon.speed = Infinity;
-				pokemon.regen = Infinity;
+				enemyPokemon.maxHealth = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.health = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.attack = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.defense = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.speed = Number.MAX_SAFE_INTEGER;
+				enemyPokemon.regen = Number.MAX_SAFE_INTEGER;
 
 				document.getElementById("event-log").innerText = `!!! P3R1G% ! 3RR# !!!`;
 			})
